@@ -1,0 +1,24 @@
+{
+  "name": "FastShiftOut",
+  "keywords": "Shift, shiftout, out, serial, fast",
+  "description": "Arduino library for (AVR) optimized shiftOut - e.g. 74HC595",
+  "authors":
+  [
+    {
+      "name": "Rob Tillaart",
+      "email": "Rob.Tillaart@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/RobTillaart/FastShiftOut.git"
+  },
+  "version":"0.2.0",
+  "frameworks": "arduino",
+  "platforms": "atmelavr",
+  "export": {
+    "include": "FastShiftOut"
+  }
+}
