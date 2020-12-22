@@ -48,8 +48,6 @@ size_t FastShiftOut::write(const uint8_t data)
   return writeMSBFIRST(data);
 }
 
-
-
 size_t FastShiftOut::writeLSBFIRST(const uint8_t data)
 {
 #if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_MEGAAVR)
@@ -100,6 +98,16 @@ size_t FastShiftOut::writeMSBFIRST(const uint8_t data)
   shiftOut(_databit, _clockbit, MSBFIRST, data);
   return 1;
 #endif
+}
+
+bool FastShiftIn::setBitOrder(const uint8_t bitOrder)
+{
+  if ((bitOrder == LSBFIRST) || (bitOrder == MSBFIRST))
+  {
+    _bitorder = bitOrder; 
+    return true;
+  };
+  return false;
 }
 
 // -- END OF FILE --
