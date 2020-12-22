@@ -90,24 +90,24 @@ unittest(test_constructor_MSB)
 
 unittest(test_write)
 {
-  FastShiftIn FSI(12, 13);
+  FastShiftOut FSO(12, 13);
 
   fprintf(stderr, "VERSION:\t%s\n", FASTSHIFTIN_LIB_VERSION);
 
-  assertEqual(1, FSI.write(0x42));
-  assertEqual(1, FSI.writeLSBFIRST(0xAA));
-  assertEqual(1, FSI.writeMSBFIRST(0x55));
+  assertEqual(1, FSO.write(0x42));
+  assertEqual(1, FSO.writeLSBFIRST(0xAA));
+  assertEqual(1, FSO.writeMSBFIRST(0x55));
 }
 
 
 unittest(test_print)
 {
-  FastShiftIn FSO(12, 13);
+  FastShiftOut FSO(12, 13);
 
   fprintf(stderr, "VERSION:\t%s\n", FASTSHIFTIN_LIB_VERSION);
 
-  assertEqual(5, FSI.print(FASTSHIFTIN_LIB_VERSION));
-  assertEqual(7, FSI.println(FASTSHIFTIN_LIB_VERSION));
+  assertEqual(5, FSO.print(FASTSHIFTIN_LIB_VERSION));
+  assertEqual(7, FSO.println(FASTSHIFTIN_LIB_VERSION));
 }
 
 
