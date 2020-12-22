@@ -27,7 +27,8 @@
 #define assertEqualINF(arg)  assertOp("assertEqualINF", "expected", INFINITY, compareEqual, "==", "actual", arg)
 #define assertEqualNAN(arg)  assertOp("assertEqualNAN", "expected", true, compareEqual, "==", "actual", isnan(arg))
 
-
+// #include "Arduino.h"
+#include "wiring_shift.c"
 #include "FastShiftOut.h"
 
 unittest_setup()
