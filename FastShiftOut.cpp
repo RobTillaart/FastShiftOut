@@ -7,6 +7,7 @@
 //     URL: https://github.com/RobTillaart/FastShiftOut
 //
 
+#include "Arduino.h"
 #include "FastShiftOut.h"
 
 FastShiftOut::FastShiftOut(const uint8_t datapin, const uint8_t clockpin, const uint8_t bitOrder)
