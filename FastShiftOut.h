@@ -21,12 +21,12 @@ public:
   size_t  write(const uint8_t data);
   uint8_t lastWritten(void) { return _value; };
 
-  bool    setBitOrder(const uint8_t bitOrder) { _bitorder = bitOrder; };
+  bool    setBitOrder(const uint8_t bitOrder);
   uint8_t getBitOrder(void) { return _bitorder; };
 
   // overrule bitorder (most optimized).
-  size_t writeLSBFIRST(const uint8_t data);
-  size_t writeMSBFIRST(const uint8_t data);
+  size_t  writeLSBFIRST(const uint8_t data);
+  size_t  writeMSBFIRST(const uint8_t data);
 
 private:
   uint8_t _bitorder;

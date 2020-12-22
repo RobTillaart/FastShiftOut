@@ -28,7 +28,7 @@
 #define assertEqualNAN(arg)  assertOp("assertEqualNAN", "expected", true, compareEqual, "==", "actual", isnan(arg))
 
 
-#include "FastShiftIn.h"
+#include "FastShiftOut.h"
 
 unittest_setup()
 {
@@ -54,52 +54,60 @@ unittest(test_new_operator)
 
 unittest(test_constructor)
 {
-  FastShiftIn FSI(12, 13);
+  FastShiftOut FSO(12, 13);
 
-  fprintf(stderr, "VERSION:\t%s\n", FASTSHIFTIN_LIB_VERSION);
-  assertEqual(0, FSI.lastRead());
-  assertEqual(LSBFIRST, FSI.getBitOrder());
-  
-  FSI.setBitOrder(MSBFIRST);
-  assertEqual(MSBFIRST, FSI.getBitOrder());
+  fprintf(stderr, "VERSION:\t%s\n", FASTSHIFTOUT_LIB_VERSION);
+  assertEqual(LSBFIRST, FSO.getBitOrder());
+
+  FSO.setBitOrder(MSBFIRST);
+  assertEqual(MSBFIRST, FSO.getBitOrder());
 }
 
 
 unittest(test_constructor_LSB)
 {
-  FastShiftIn FSI(12, 13, LSBFIRST);
+  FastShiftOut FSO(12, 13);
 
-  fprintf(stderr, "VERSION:\t%s\n", FASTSHIFTIN_LIB_VERSION);
-  assertEqual(0, FSI.lastRead());
-  assertEqual(LSBFIRST, FSI.getBitOrder());
-  
-  FSI.setBitOrder(MSBFIRST);
-  assertEqual(MSBFIRST, FSI.getBitOrder());
+  fprintf(stderr, "VERSION:\t%s\n", FASTSHIFTOUT_LIB_VERSION);
+  assertEqual(LSBFIRST, FSO.getBitOrder());
+
+  FSO.setBitOrder(MSBFIRST);
+  assertEqual(MSBFIRST, FSO.getBitOrder());
 }
 
 
 unittest(test_constructor_MSB)
 {
-  FastShiftIn FSI(12, 13, MSBFIRST);
+  FastShiftOut FSO(12, 13);
 
-  fprintf(stderr, "VERSION:\t%s\n", FASTSHIFTIN_LIB_VERSION);
-  assertEqual(0, FSI.lastRead());
-  assertEqual(MSBFIRST, FSI.getBitOrder());
+  fprintf(stderr, "VERSION:\t%s\n", FASTSHIFTOUT_LIB_VERSION);
+  assertEqual(MSBFIRST, FSO.getBitOrder());
   
-  FSI.setBitOrder(LSBFIRST);
-  assertEqual(LSBFIRST, FSI.getBitOrder());
+  FSO.setBitOrder(LSBFIRST);
+  assertEqual(LSBFIRST, FSO.getBitOrder());
 }
 
 
-unittest(test_read)
+unittest(test_write)
 {
   FastShiftIn FSI(12, 13);
 
   fprintf(stderr, "VERSION:\t%s\n", FASTSHIFTIN_LIB_VERSION);
 
-  assertEqual(255, FSI.read());
-  assertEqual(255, FSI.readLSBFIRST());
-  assertEqual(255, FSI.readMSBFIRST());
+  assertEqual(1, FSI.write(0x42));
+  assertEqual(1, FSI.writeLSBFIRST(0xAA));
+  assertEqual(1, FSI.writeMSBFIRST(0x55));
+}
+
+
+unittest(test_print)
+{
+  FastShiftIn FSO(12, 13);
+
+  fprintf(stderr, "VERSION:\t%s\n", FASTSHIFTIN_LIB_VERSION);
+
+  assertEqual(5, FSI.print(FASTSHIFTIN_LIB_VERSION));
+  assertEqual(7, FSI.println(FASTSHIFTIN_LIB_VERSION));
 }
 
 

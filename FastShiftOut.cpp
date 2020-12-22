@@ -48,10 +48,11 @@ size_t FastShiftOut::write(const uint8_t data)
   return writeMSBFIRST(data);
 }
 
-#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_MEGAAVR)
+
 
 size_t FastShiftOut::writeLSBFIRST(const uint8_t data)
 {
+#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_MEGAAVR)
   uint8_t cbmask1 = _clockbit;
   uint8_t cbmask2 = ~_clockbit;
   uint8_t dbmask1 = _databit;
@@ -60,7 +61,7 @@ size_t FastShiftOut::writeLSBFIRST(const uint8_t data)
   for (uint8_t i = 0, m = 1; i < 8; i++)
   {
     uint8_t oldSREG = SREG;
-    cli();
+    noInterrupts();
     if ((data & m) == 0) *_dataout &= dbmask2;
     else                 *_dataout |= dbmask1;
     *_clockout |= cbmask1;
@@ -69,10 +70,15 @@ size_t FastShiftOut::writeLSBFIRST(const uint8_t data)
     m <<= 1;
   }
   return 1;
+#else
+  shiftOut(_databit, _clockbit, LSBFIRST, data);
+  return 1;
+#endif
 }
 
 size_t FastShiftOut::writeMSBFIRST(const uint8_t data)
 {
+#if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_MEGAAVR)
   uint8_t cbmask1 = _clockbit;
   uint8_t cbmask2 = ~_clockbit;
   uint8_t dbmask1 = _databit;
@@ -81,7 +87,7 @@ size_t FastShiftOut::writeMSBFIRST(const uint8_t data)
   for (uint8_t i = 0, n = 128; i < 8; i++)
   {
     uint8_t oldSREG = SREG;
-    cli();
+    noInterrupts();
     if ((data & n) == 0) *_dataout &= dbmask2;
     else                 *_dataout |= dbmask1;
     *_clockout |= cbmask1;
@@ -90,22 +96,10 @@ size_t FastShiftOut::writeMSBFIRST(const uint8_t data)
     n >>= 1;
   }
   return 1;
-}
-
 #else  // reference implementation  // note this has no cli()
-
-size_t FastShiftOut::writeLSBFIRST(const uint8_t data)
-{
-  shiftOut(_databit, _clockbit, LSBFIRST, data);
-    return 1;
-}
-
-size_t FastShiftOut::writeMSBFIRST(const uint8_t data)
-{
   shiftOut(_databit, _clockbit, MSBFIRST, data);
-    return 1;
-}
-
+  return 1;
 #endif
+}
 
 // -- END OF FILE --
