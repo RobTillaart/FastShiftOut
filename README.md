@@ -26,6 +26,9 @@ It does a comparison and shows how the class is to be used.
 The interface exists of the following functions:
 
 - **size_t write(const uint8_t data);**
+- **uint8_t lastWritten()**
+- **bool setBitOrder(bitOrder)** set LSBFIRST or MSBFIRST. Returns false for other values.
+- **uint8_t getBitOrder(void)** returns LSBFIRST or MSBFIRST
 - **size_t writeLSBFIRST(const uint8_t data);**  most optimized
 - **size_t writeMSBFIRST(const uint8_t data);**  most optimized
 
