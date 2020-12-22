@@ -100,7 +100,7 @@ size_t FastShiftOut::writeMSBFIRST(const uint8_t data)
 #endif
 }
 
-bool FastShiftIn::setBitOrder(const uint8_t bitOrder)
+bool FastShiftOut::setBitOrder(const uint8_t bitOrder)
 {
   if ((bitOrder == LSBFIRST) || (bitOrder == MSBFIRST))
   {
