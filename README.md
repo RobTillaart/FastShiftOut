@@ -1,8 +1,14 @@
+
+[![Arduino CI](https://github.com/RobTillaart/FastShiftOut/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobTillaart/FastShiftOut/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/RobTillaart/FastShiftOut.svg?maxAge=3600)](https://github.com/RobTillaart/FastShiftOut/releases)
+
+
 # FastShiftOut
 
 Arduino library for (AVR) optimized shiftOut - e.g. 74HC595
 
-A library for FastShiftOut also exist.
+A library for FastShiftIn also exist - https://github.com/RobTillaart/FastShiftIn
 
 ## Description
 
