@@ -7,7 +7,7 @@
 //     URL: https://github.com/RobTillaart/FastShiftOut
 //
 
-#include "Arduino.h"
+
 #include "FastShiftOut.h"
 
 FastShiftOut::FastShiftOut(const uint8_t datapin, const uint8_t clockpin, const uint8_t bitOrder)
@@ -15,6 +15,8 @@ FastShiftOut::FastShiftOut(const uint8_t datapin, const uint8_t clockpin, const 
   _bitorder = bitOrder;
   pinMode(datapin, OUTPUT);
   pinMode(clockpin, OUTPUT);
+  // https://www.arduino.cc/reference/en/language/functions/advanced-io/shiftout/
+  digitalWrite(clockpin, LOW);  // assume rising pulses from clock 
 
 #if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_MEGAAVR)
 
