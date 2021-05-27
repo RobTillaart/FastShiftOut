@@ -1,16 +1,18 @@
 //
 //    FILE: FastShiftOut_test.ino
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.1
+// VERSION: 0.1.2
 // PURPOSE: test sketch
-//     URL: https://github.com/RobTillaart/FastSHiftOut
+//     URL: https://github.com/RobTillaart/FastShiftOut
 //
+
 
 #include "FastShiftOut.h"
 
 FastShiftOut FSO(12, 13, LSBFIRST);
 
 uint32_t start, duration1, duration2;
+
 
 void setup()
 {
@@ -25,6 +27,7 @@ void setup()
 
   Serial.println("\ndone ...\n");
 }
+
 
 void test1()
 {
@@ -79,6 +82,7 @@ void test2()
   delay(100);
 }
 
+
 void test3()
 {
   Serial.println("\nTest print interface");
@@ -112,8 +116,10 @@ void test3()
   delay(100);
 }
 
+
 void loop()
 {
 }
+
 
 // -- END OF FILE --

@@ -3,14 +3,14 @@
 //  AUTHOR: Rob Tillaart
 // VERSION: 0.1.01
 // PURPOSE: test sketch
-//     URL:
+//     URL: https://github.com/RobTillaart/FastShiftOut
 //
-// Released to the public domain
-//
+
 
 #include "FastShiftOut.h"
 
 FastShiftOut FSO(12, 13, LSBFIRST);
+
 
 void setup()
 {
@@ -96,7 +96,10 @@ void setup()
   Serial.println("\ndone ...");
 }
 
+
 void loop()
 {
 }
 
+
+// -- END OF FILE --
