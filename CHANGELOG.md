@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.3.3] - 2024-07-23
 - Fix #13, add wrapper functions
-  - read16/24/32, read(array, size)
+  - write16/24/32, write(array, size)
 - improved timing measurement in FastShiftOut_test.ino
 - update readme.md
 - minor edits
