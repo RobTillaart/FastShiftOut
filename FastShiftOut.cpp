@@ -162,10 +162,8 @@ size_t FastShiftOut::writeLSBFIRST(uint8_t data)
 
 #if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_MEGAAVR)
 
-
 #if defined(FASTSHIFTOUT_AVR_LOOP_UNROLLED)  //  AVR SPEED OPTIMIZED
 
-  uint8_t oldSREG = SREG;
   noInterrupts();
 
   uint8_t cbmask1  = _clockBit;
@@ -213,7 +211,7 @@ size_t FastShiftOut::writeLSBFIRST(uint8_t data)
   *_clockRegister |= cbmask1;
   *_clockRegister &= cbmask2;
 
-  SREG = oldSREG;
+  interrupts();
 
 #else  //  AVR SIZE OPTIMIZED
 
@@ -224,13 +222,12 @@ size_t FastShiftOut::writeLSBFIRST(uint8_t data)
 
   for (uint8_t m = 1; m > 0; m <<= 1)
   {
-    uint8_t oldSREG = SREG;
     noInterrupts();
     if ((value & m) == 0) *_dataOutRegister &= outmask2;
     else                  *_dataOutRegister |= outmask1;
     *_clockRegister |= cbmask1;
     *_clockRegister &= cbmask2;
-    SREG = oldSREG;
+    interrupts();
   }
 
 #endif
@@ -255,7 +252,6 @@ size_t FastShiftOut::writeMSBFIRST(uint8_t data)
 
 #if defined(FASTSHIFTOUT_AVR_LOOP_UNROLLED)  //  AVR SPEED OPTIMIZED
 
-  uint8_t oldSREG = SREG;
   noInterrupts();
 
   uint8_t cbmask1  = _clockBit;
@@ -303,8 +299,7 @@ size_t FastShiftOut::writeMSBFIRST(uint8_t data)
   *_clockRegister |= cbmask1;
   *_clockRegister &= cbmask2;
 
-  SREG = oldSREG;
-
+  interrupts();
 
 #else  //  AVR SIZE OPTIMIZED
 
@@ -316,13 +311,12 @@ size_t FastShiftOut::writeMSBFIRST(uint8_t data)
 
   for (uint8_t m = 0x80; m > 0; m >>= 1)
   {
-    uint8_t oldSREG = SREG;
     noInterrupts();
     if ((value & m) == 0) *_dataOutRegister &= outmask2;
     else                  *_dataOutRegister |= outmask1;
     *_clockRegister |= cbmask1;
     *_clockRegister &= cbmask2;
-   SREG = oldSREG;
+   interrupts();
   }
 
 #endif
