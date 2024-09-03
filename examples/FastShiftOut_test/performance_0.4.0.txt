@@ -4,39 +4,41 @@ Board: UNO
 FASTSHIFTOUT_LIB_VERSION: 0.4.0
 
 Performance - time in us
-        write: 15.02
-        write: 28.80
-        Delta: 13.78
+        write: 18.60
+        write: 35.97
+        Delta: 17.36
 
-writeLSBFIRST: 13.96
-writeLSBFIRST: 27.66
-        Delta: 13.70
+writeLSBFIRST: 17.61
+writeLSBFIRST: 34.96
+        Delta: 17.35
 
-writeMSBFIRST: 13.96
-writeMSBFIRST: 27.67
-        Delta: 13.70
+writeMSBFIRST: 17.60
+writeMSBFIRST: 34.96
+        Delta: 17.36
 
 Standard shiftOut1: 89.85
 Standard shiftOut2: 179.44
              Delta: 89.59
 
-      write16: 28.74
-      write16: 57.22
-        Delta: 28.48
+      write16: 35.84
+      write16: 71.43
+        Delta: 35.59
 
-      write24: 42.45
-      write24: 84.63
-        Delta: 42.18
+      write24: 53.19
+      write24: 106.14
+        Delta: 52.94
 
-      write32: 56.15
-      write32: 112.04
-        Delta: 55.89
+      write32: 70.54
+      write32: 140.84
+        Delta: 70.29
 
 
 Test print interface
-println("Hello world"): 	218.56
-println(1357): 			260.76
-println(3.14159265, 4): 	648.12
+println("Hello world"): 	265.16
+println(1357): 			282.24
+println(3.14159265, 4): 	676.80
+
+
 
 
 done ...

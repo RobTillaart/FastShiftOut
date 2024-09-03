@@ -6,7 +6,7 @@
 
 #include "FastShiftOut.h"
 
-FastShiftOut FSO(12, 13, MSBFIRST);
+FastShiftOut FSO(12, 13, LSBFIRST);
 
 uint32_t start, duration1, duration2;
 

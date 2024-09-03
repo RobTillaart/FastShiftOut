@@ -58,16 +58,16 @@ Indicative time in microseconds, Arduino UNO, 1.8.19, measured over 1000 calls.
 
 |  function                |  0.2.4  |   0.3.1  |   0.3.3  |   0.4.0  |
 |:-------------------------|--------:|---------:|---------:|---------:|
-|  write()                 |  21.66  |   22.48  |   22.27  |   13.78  |
-|  writeLSBFIRST()         |  22.94  |   23.37  |   22.25  |   13.70  |
-|  writeMSBFIRST()         |  20.30  |   21.86  |   22.26  |   13.70  |
+|  write()                 |  21.66  |   22.48  |   22.27  |   17.36  |
+|  writeLSBFIRST()         |  22.94  |   23.37  |   22.25  |   17.35  |
+|  writeMSBFIRST()         |  20.30  |   21.86  |   22.26  |   17.36  |
 |  reference shiftOut()    |  89.74  |   89.74  |   89.59  |   89.59  |
-|  write16()               |   na    |    na    |   45.39  |   28.48  |
-|  write24()               |   na    |    na    |   67.66  |   42.18  |
-|  write32()               |   na    |    na    |   89.91  |   55.89  |
-|  println("Hello world")  |         |  328.92  |  328.92  |  218.56  |
-|  println(1357)           |         |  313.56  |  311.60  |  260.76  |
-|  println(3.14159265, 4)  |         |  717.36  |  716.04  |  648.12  |
+|  write16()               |   na    |    na    |   45.39  |   35.59  |
+|  write24()               |   na    |    na    |   67.66  |   52.94  |
+|  write32()               |   na    |    na    |   89.91  |   70.29  |
+|  println("Hello world")  |         |  328.92  |  328.92  |  265.16  |
+|  println(1357)           |         |  313.56  |  311.60  |  282.24  |
+|  println(3.14159265, 4)  |         |  717.36  |  716.04  |  676.80  |
 
 Note: 0.3.3 has improved the measurement, not the code sec.  
 Note: 0.3.3 fixed when implementing 0.4.0.  

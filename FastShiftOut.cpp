@@ -168,50 +168,50 @@ size_t FastShiftOut::writeLSBFIRST(uint8_t data)
   uint8_t oldSREG = SREG;
   noInterrupts();
 
-  uint8_t cbmask1  = *_clockRegister | _clockBit;
-  uint8_t cbmask2  = *_clockRegister & ~_clockBit;
-  uint8_t outmask1 = *_dataOutRegister | _dataOutBit;
-  uint8_t outmask2 = *_dataOutRegister & ~_dataOutBit;
+  uint8_t cbmask1  = _clockBit;
+  uint8_t cbmask2  = ~_clockBit;
+  uint8_t outmask1 = _dataOutBit;
+  uint8_t outmask2 = ~_dataOutBit;
 
-  if ((value & 0x01) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x01) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x02) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x02) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x04) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x04) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x08) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x08) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x10) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x10) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x20) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x20) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x40) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x40) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x80) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x80) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
   SREG = oldSREG;
 
@@ -258,50 +258,50 @@ size_t FastShiftOut::writeMSBFIRST(uint8_t data)
   uint8_t oldSREG = SREG;
   noInterrupts();
 
-  uint8_t cbmask1  = *_clockRegister | _clockBit;
-  uint8_t cbmask2  = *_clockRegister & ~_clockBit;
-  uint8_t outmask1 = *_dataOutRegister | _dataOutBit;
-  uint8_t outmask2 = *_dataOutRegister & ~_dataOutBit;
+  uint8_t cbmask1  = _clockBit;
+  uint8_t cbmask2  = ~_clockBit;
+  uint8_t outmask1 = _dataOutBit;
+  uint8_t outmask2 = ~_dataOutBit;
 
-  if ((value & 0x80) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x80) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x40) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x40) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x20) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x20) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x10) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x10) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x08) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x08) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x04) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x04) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x02) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x02) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
-  if ((value & 0x01) == 0) *_dataOutRegister = outmask2;
-  else                     *_dataOutRegister = outmask1;
-  *_clockRegister = cbmask1;
-  *_clockRegister = cbmask2;
+  if ((value & 0x01) == 0) *_dataOutRegister &= outmask2;
+  else                     *_dataOutRegister |= outmask1;
+  *_clockRegister |= cbmask1;
+  *_clockRegister &= cbmask2;
 
   SREG = oldSREG;
 
