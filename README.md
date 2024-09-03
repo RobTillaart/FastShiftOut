@@ -172,6 +172,9 @@ pull up resistors, especially if wires are exceeding 10 cm (4").
 - investigate ESP32 optimization readLSBFIRST readMSBFIRST
 - performance ESP32
 - example schema
+- add invert flag?
+  - if ((value & m) == 0) ==> if ((value & m) == invertFlag...
+  - derived class?
 
 #### Wont
 
