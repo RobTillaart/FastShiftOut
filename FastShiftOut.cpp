@@ -1,7 +1,7 @@
 //
 //    FILE: FastShiftOut.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.3.2
+// VERSION: 0.4.0
 // PURPOSE: ShiftOut that implements the Print interface
 //    DATE: 2013-08-22
 //     URL: https://github.com/RobTillaart/FastShiftOut
@@ -112,7 +112,6 @@ size_t FastShiftOut::write32(uint32_t data)
 //  EXPERIMENTAL 0.3.3
 size_t FastShiftOut::write(uint8_t * array, size_t size)
 {
-  size_t n = 0;
   if (_bitOrder == LSBFIRST)
   {
     for (size_t i = size; i > 0; )      //  from end to begin ????
@@ -163,6 +162,61 @@ size_t FastShiftOut::writeLSBFIRST(uint8_t data)
 
 #if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_MEGAAVR)
 
+
+#if defined(FASTSHIFTOUT_AVR_LOOP_UNROLLED)  //  AVR SPEED OPTIMIZED
+
+  uint8_t oldSREG = SREG;
+  noInterrupts();
+
+  uint8_t cbmask1  = *_clockRegister | _clockBit;
+  uint8_t cbmask2  = *_clockRegister & ~_clockBit;
+  uint8_t outmask1 = *_dataOutRegister | _dataOutBit;
+  uint8_t outmask2 = *_dataOutRegister & ~_dataOutBit;
+
+  if ((value & 0x80) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x40) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x20) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x10) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x08) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x04) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x02) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x01) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  SREG = oldSREG;
+
+#else  //  AVR SIZE OPTIMIZED
+
   uint8_t cbmask1  = _clockBit;
   uint8_t cbmask2  = ~_clockBit;
   uint8_t outmask1 = _dataOutBit;
@@ -178,6 +232,8 @@ size_t FastShiftOut::writeLSBFIRST(uint8_t data)
     *_clockRegister &= cbmask2;
     SREG = oldSREG;
   }
+
+#endif
 
 #else
 
@@ -196,10 +252,67 @@ size_t FastShiftOut::writeMSBFIRST(uint8_t data)
 
 #if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_MEGAAVR)
 
+
+#if defined(FASTSHIFTOUT_AVR_LOOP_UNROLLED)  //  AVR SPEED OPTIMIZED
+
+  uint8_t oldSREG = SREG;
+  noInterrupts();
+
+  uint8_t cbmask1  = *_clockRegister | _clockBit;
+  uint8_t cbmask2  = *_clockRegister & ~_clockBit;
+  uint8_t outmask1 = *_dataOutRegister | _dataOutBit;
+  uint8_t outmask2 = *_dataOutRegister & ~_dataOutBit;
+
+  if ((value & 0x80) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x40) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x20) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x10) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x08) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x04) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x02) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  if ((value & 0x01) == 0) *_dataOutRegister = outmask2;
+  else                     *_dataOutRegister = outmask1;
+  *_clockRegister = cbmask1;
+  *_clockRegister = cbmask2;
+
+  SREG = oldSREG;
+
+
+#else  //  AVR SIZE OPTIMIZED
+
   uint8_t cbmask1  = _clockBit;
   uint8_t cbmask2  = ~_clockBit;
   uint8_t outmask1 = _dataOutBit;
   uint8_t outmask2 = ~_dataOutBit;
+
 
   for (uint8_t m = 0x80; m > 0; m >>= 1)
   {
@@ -209,12 +322,17 @@ size_t FastShiftOut::writeMSBFIRST(uint8_t data)
     else                  *_dataOutRegister |= outmask1;
     *_clockRegister |= cbmask1;
     *_clockRegister &= cbmask2;
-    SREG = oldSREG;
+   SREG = oldSREG;
   }
 
-#else
+#endif
 
+
+#else  //  reference shiftOut()
+
+  //  noInterrupts()
   shiftOut(_dataPinOut, _clockPin, MSBFIRST, value);
+  //  interrupts();
 
 #endif
 

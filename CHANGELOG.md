@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.4.0] - 2024-09-03
+- fix #15, loop un roll option, kudos to nt314p
+- fixed bug in test program (see discussion #15)
+- added flag to select LOOP UNROLL (is optional as it gives larger code size)
+- update readme.md
+- minor edits
+
+----
+
 ## [0.3.3] - 2024-07-23
 - Fix #13, add wrapper functions
   - write16/24/32, write(array, size)
