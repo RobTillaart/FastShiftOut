@@ -32,6 +32,15 @@ The library provides wrapper functions to write multi-byte variables.
 These are write16(), write24(), write32() and write(array, size).
 The latter is used to shift out any size object.
 
+### 0.4.0 breaking changes
+
+The 0.4.0 version has a flag to unroll the inner loop in **writeLSBFIRST()**
+and **writeMSBFIRST()**. 
+
+Furthermore 0.4.0 removed the disabling of interrupts as it is unknown if the
+project at hand needs it or not. So this is now a user responsibility.
+And it is also more in line with the behaviour of **shiftOut()**.
+
 
 ### Performance
 
@@ -42,37 +51,30 @@ It does a comparison and shows how the class is to be used.
 See also table below.
 
 
-#### 0.4.0
-
-The 0.4.0 version has a flag to unroll the inner loop in **writeLSBFIRST()**
-and **writeMSBFIRST()**. Furthermore this flag disables the interrupts only
-once per byte (default is per bit). This flag improves the performance about
-38% at the costs of RAM size and postponed interrupts.
-
-
 #### Measurements
 
 Numbers may vary depending on bit-order.
 
-Indicative time in microseconds, Arduino UNO, 1.8.19, measured over 1000 calls.
+Indicative time in microseconds, Arduino UNO, 1.8.19, measured over 1000 calls.  
+(delta between 2 calls and 1 call to eliminate overhead)
 
 |  function                |  0.2.4  |   0.3.1  |   0.3.3  |   0.4.0  |
 |:-------------------------|--------:|---------:|---------:|---------:|
-|  write()                 |  21.66  |   22.48  |   22.27  |   17.36  |
-|  writeLSBFIRST()         |  22.94  |   23.37  |   22.25  |   17.35  |
-|  writeMSBFIRST()         |  20.30  |   21.86  |   22.26  |   17.36  |
+|  write()                 |  21.66  |   22.48  |   22.27  |   17.18  |
+|  writeLSBFIRST()         |  22.94  |   23.37  |   22.25  |   17.17  |
+|  writeMSBFIRST()         |  20.30  |   21.86  |   22.26  |   17.16  |
 |  reference shiftOut()    |  89.74  |   89.74  |   89.59  |   89.59  |
-|  write16()               |   na    |    na    |   45.39  |   35.59  |
-|  write24()               |   na    |    na    |   67.66  |   52.94  |
-|  write32()               |   na    |    na    |   89.91  |   70.29  |
-|  println("Hello world")  |         |  328.92  |  328.92  |  265.16  |
-|  println(1357)           |         |  313.56  |  311.60  |  282.24  |
-|  println(3.14159265, 4)  |         |  717.36  |  716.04  |  676.80  |
+|  write16()               |   na    |    na    |   45.39  |   35.21  |
+|  write24()               |   na    |    na    |   67.66  |   52.38  |
+|  write32()               |   na    |    na    |   89.91  |   69.54  |
+|  println("Hello world")  |         |  328.92  |  328.92  |  262.68  |
+|  println(1357)           |         |  313.56  |  311.60  |  281.04  |
+|  println(3.14159265, 4)  |         |  717.36  |  716.04  |  675.28  |
 
 Note: 0.3.3 has improved the measurement, not the code sec.  
-Note: 0.3.3 fixed when implementing 0.4.0.  
+Note: 0.3.3 numbers fixed when implementing 0.4.0.  
 Note: 0.4.0 measured with loop unrolled flag enabled. When disabled, 
-figures match 0.3.3. 
+figures are slightly better than 0.3.3 (removed interrupt handling).
 
 
 ### Related
@@ -163,9 +165,6 @@ pull up resistors, especially if wires are exceeding 10 cm (4").
 #### Should
 
 - extend unit tests
-- add noInterrupts for reference too? always?
-  (obsolete the SREG code)
-- move noInterrupts from the inner loop in SIZE optimized code (gain ~10%)
 
 #### Could
 

@@ -14,7 +14,7 @@
 #define FASTSHIFTOUT_LIB_VERSION        (F("0.4.0"))
 
 //  uncomment next line to get SPEED OPTIMIZED CODE
-#define FASTSHIFTOUT_AVR_LOOP_UNROLLED    1
+//  #define FASTSHIFTOUT_AVR_LOOP_UNROLLED    1
 
 
 class FastShiftOut : public Print
