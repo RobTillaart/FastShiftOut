@@ -16,8 +16,8 @@ Arduino library for **AVR** optimized shiftOut - e.g. 74HC595.
 
 ## Description
 
-FastShiftOut is a class that has optimized code (AVR only) to shift out data faster 
-than the normal **shiftOut()** function.
+FastShiftOut is a class that has optimized code (**AVR** only) to shift out data faster 
+than the default provided **shiftOut()** function.
 It speeds up the shift using low level ports and masks. These are predetermined
 in the constructor of the FastShiftOut object.
 
@@ -32,49 +32,47 @@ The library provides wrapper functions to write multi-byte variables.
 These are write16(), write24(), write32() and write(array, size).
 The latter is used to shift out any size object.
 
+
 ### 0.4.0 breaking changes
 
 The 0.4.0 version has a flag to unroll the inner loop in **writeLSBFIRST()**
-and **writeMSBFIRST()**. 
-
-Furthermore 0.4.0 removed the disabling of interrupts as it is unknown if the
-project at hand needs it or not. So this is now a user responsibility.
-And it is also more in line with the behaviour of **shiftOut()**.
+and **writeMSBFIRST()**. Note: this optimization is new and thus experimental.
+Feedback, including improvements, is welcome.
 
 
 ### Performance
 
 The performance of **write()** is substantially faster for **AVR** than the default 
 Arduino **shiftOut()**, but not as fast as HW SPI (need test?). 
-Exact how large the performance gain is can be seen with the example sketch.
-It does a comparison and shows how the class is to be used.
+Exact how large the performance gain is can be seen with the example **FastShiftOut_test.ino**.
+It does a measurement of different functions and shows how the class is to be used.
 See also table below.
 
 
 #### Measurements
 
-Numbers may vary depending on bit-order.
+Numbers may vary depending on bit-order flag.
 
-Indicative time in microseconds, Arduino UNO, 1.8.19, measured over 1000 calls.  
+Indicative time in microseconds, Arduino UNO, IDE 1.8.19, measured over 1000 calls.  
 (delta between 2 calls and 1 call to eliminate overhead)
 
-|  function                |  0.2.4  |   0.3.1  |   0.3.3  |   0.4.0  |
-|:-------------------------|--------:|---------:|---------:|---------:|
-|  write()                 |  21.66  |   22.48  |   22.27  |   17.18  |
-|  writeLSBFIRST()         |  22.94  |   23.37  |   22.25  |   17.17  |
-|  writeMSBFIRST()         |  20.30  |   21.86  |   22.26  |   17.16  |
-|  reference shiftOut()    |  89.74  |   89.74  |   89.59  |   89.59  |
-|  write16()               |   na    |    na    |   45.39  |   35.21  |
-|  write24()               |   na    |    na    |   67.66  |   52.38  |
-|  write32()               |   na    |    na    |   89.91  |   69.54  |
-|  println("Hello world")  |         |  328.92  |  328.92  |  262.68  |
-|  println(1357)           |         |  313.56  |  311.60  |  281.04  |
-|  println(3.14159265, 4)  |         |  717.36  |  716.04  |  675.28  |
+|  function                |  0.2.4  |   0.3.1  |   0.3.3  |   0.4.0  |  0.4.0L  |
+|:-------------------------|--------:|---------:|---------:|---------:|---------:|
+|  write()                 |  21.66  |   22.48  |   22.27  |   22.01  |   15.91  |
+|  writeLSBFIRST()         |  22.94  |   23.37  |   22.25  |   22.00  |   15.90  |
+|  writeMSBFIRST()         |  20.30  |   21.86  |   22.26  |   22.00  |   15.90  |
+|  reference shiftOut()    |  89.74  |   89.74  |   89.59  |   89.60  |   89.59  |
+|  write16()               |   na    |    na    |   45.39  |   44.89  |   32.70  |
+|  write24()               |   na    |    na    |   67.66  |   66.89  |   48.60  |
+|  write32()               |   na    |    na    |   89.91  |   88.90  |   64.51  |
+|  println("Hello world")  |   na    |  328.92  |  328.92  |  325.64  |  246.36  |
+|  println(1357)           |   na    |  313.56  |  311.60  |  310.08  |  273.48  |
+|  println(3.14159265, 4)  |   na    |  717.36  |  716.04  |  714.04  |  665.24  |
 
-Note: 0.3.3 has improved the measurement, not the code sec.  
-Note: 0.3.3 numbers fixed when implementing 0.4.0.  
-Note: 0.4.0 measured with loop unrolled flag enabled. When disabled, 
-figures are slightly better than 0.3.3 (removed interrupt handling).
+- Note: 0.3.3 has improved the measurement, not the code sec.
+- Note: 0.3.3 numbers fixed when implementing 0.4.0. (error in test sketch).
+- Note: 0.4.0L measured with loop unrolled flag enabled.
+- Note: 0.4.0 measured with loop unroll flag disabled.
 
 
 ### Related
@@ -100,9 +98,9 @@ figures are slightly better than 0.3.3 (removed interrupt handling).
 ### Functions
 
 - **size_t write(uint8_t data)** send a byte, also the workhorse of the **Print** interface.
-- **size_t write16(uint16_t data)** send 2 bytes. Wrapper around 8 but calls.
-- **size_t write24(uint32_t data)** send 3 bytes. Wrapper around 8 but calls.
-- **size_t write32(uint32_t data)** send 4 bytes. Wrapper around 8 but calls.
+- **size_t write16(uint16_t data)** send 2 bytes. Wrapper around 8 bit calls.
+- **size_t write24(uint32_t data)** send 3 bytes. Wrapper around 8 bit calls.
+- **size_t write32(uint32_t data)** send 4 bytes. Wrapper around 8 bit calls.
 - **size_t write(uint8_t \*array, size_t size)** send array of size bytes.
 - **uint8_t lastWritten()** returns last byte written.
 

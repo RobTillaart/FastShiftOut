@@ -42,7 +42,7 @@ public:
 
 private:
   uint8_t _bitOrder;
-  int     _lastValue;
+  uint8_t _lastValue;
 
 
 #if defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_MEGAAVR)
@@ -62,4 +62,4 @@ private:
 };
 
 
-// -- END OF FILE --
+//  -- END OF FILE --
