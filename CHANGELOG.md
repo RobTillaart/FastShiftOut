@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - fix #15, loop unroll option, improving performance, kudos to nt314p
 - fixed bug in test program (see #15)
 - added flag to select LOOP UNROLL (is optional as it gives larger code size)
+- optimized the not unrolled loop with ideas of the unrolling version.
 - corrected type lastValue to uint8_t
 - update readme.md
 - minor edits

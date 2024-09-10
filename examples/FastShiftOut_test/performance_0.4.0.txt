@@ -1,44 +1,44 @@
 IDE:   1.8.19
 Board: UNO
 
+loop unrolled version
+
 FASTSHIFTOUT_LIB_VERSION: 0.4.0
 
 Performance - time in us
-        write: 18.60
-        write: 35.97
-        Delta: 17.36
+        write: 12.76
+        write: 24.27
+        Delta: 11.51
 
-writeLSBFIRST: 17.61
-writeLSBFIRST: 34.96
-        Delta: 17.35
+writeLSBFIRST: 11.76
+writeLSBFIRST: 23.26
+        Delta: 11.50
 
-writeMSBFIRST: 17.60
-writeMSBFIRST: 34.96
-        Delta: 17.36
+writeMSBFIRST: 11.76
+writeMSBFIRST: 23.27
+        Delta: 11.50
 
 Standard shiftOut1: 89.85
-Standard shiftOut2: 179.44
-             Delta: 89.59
+Standard shiftOut2: 179.45
+             Delta: 89.60
 
-      write16: 35.84
-      write16: 71.43
-        Delta: 35.59
+      write16: 24.14
+      write16: 48.04
+        Delta: 23.89
 
-      write24: 53.19
-      write24: 106.14
-        Delta: 52.94
+      write24: 35.66
+      write24: 71.05
+        Delta: 35.40
 
-      write32: 70.54
-      write32: 140.84
-        Delta: 70.29
+      write32: 47.16
+      write32: 94.06
+        Delta: 46.90
 
 
 Test print interface
-println("Hello world"): 	265.16
-println(1357): 			282.24
-println(3.14159265, 4): 	676.80
-
-
+println("Hello world"): 	189.20
+println(1357): 			247.12
+println(3.14159265, 4): 	629.96
 
 
 done ...

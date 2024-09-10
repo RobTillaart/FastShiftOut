@@ -36,7 +36,7 @@ The latter is used to shift out any size object.
 ### 0.4.0 breaking changes
 
 The 0.4.0 version has a flag to unroll the inner loop in **writeLSBFIRST()**
-and **writeMSBFIRST()**. The unrolled loop blocks the interrupts per byte.
+and **writeMSBFIRST()**. The AVR optimized code blocks the interrupts per byte.
 
 Note: this optimization is new and thus experimental.
 Feedback, including improvements, is welcome.
@@ -60,21 +60,21 @@ Indicative time in microseconds, Arduino UNO, IDE 1.8.19, measured over 1000 cal
 
 |  function                |  0.2.4  |   0.3.1  |   0.3.3  |   0.4.0  |  0.4.0L  |
 |:-------------------------|--------:|---------:|---------:|---------:|---------:|
-|  write()                 |  21.66  |   22.48  |   22.27  |   22.01  |   15.91  |
-|  writeLSBFIRST()         |  22.94  |   23.37  |   22.25  |   22.00  |   15.90  |
-|  writeMSBFIRST()         |  20.30  |   21.86  |   22.26  |   22.00  |   15.90  |
-|  reference shiftOut()    |  89.74  |   89.74  |   89.59  |   89.60  |   89.59  |
-|  write16()               |   na    |    na    |   45.39  |   44.89  |   32.70  |
-|  write24()               |   na    |    na    |   67.66  |   66.89  |   48.60  |
-|  write32()               |   na    |    na    |   89.91  |   88.90  |   64.51  |
-|  println("Hello world")  |   na    |  328.92  |  328.92  |  325.64  |  246.36  |
-|  println(1357)           |   na    |  313.56  |  311.60  |  310.08  |  273.48  |
-|  println(3.14159265, 4)  |   na    |  717.36  |  716.04  |  714.04  |  665.24  |
+|  write()                 |  21.66  |   22.48  |   22.27  |   14.10  |   11.51  |
+|  writeLSBFIRST()         |  22.94  |   23.37  |   22.25  |   14.09  |   11.50  |
+|  writeMSBFIRST()         |  20.30  |   21.86  |   22.26  |   14.08  |   11.50  |
+|  reference shiftOut()    |  89.74  |   89.74  |   89.59  |   89.60  |   89.60  |
+|  write16()               |   na    |    na    |   45.39  |   29.06  |   23.89  |
+|  write24()               |   na    |    na    |   67.66  |   43.12  |   35.40  |
+|  write32()               |   na    |    na    |   89.91  |   57.22  |   46.90  |
+|  println("Hello world")  |   na    |  328.92  |  328.92  |  222.68  |  189.20  |
+|  println(1357)           |   na    |  313.56  |  311.60  |  262.60  |  247.12  |
+|  println(3.14159265, 4)  |   na    |  717.36  |  716.04  |  650.68  |  629.96  |
 
 - Note: 0.3.3 has improved the measurement, not the code sec.
 - Note: 0.3.3 numbers fixed when implementing 0.4.0. (error in test sketch).
 - Note: 0.4.0 measured with loop unroll flag disabled.
-- Note: 0.4.0L measured with loop unrolled flag enabled. (~25% faster)
+- Note: 0.4.0L measured with loop unrolled flag enabled.
 
 
 ### Related
