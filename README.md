@@ -36,7 +36,9 @@ The latter is used to shift out any size object.
 ### 0.4.0 breaking changes
 
 The 0.4.0 version has a flag to unroll the inner loop in **writeLSBFIRST()**
-and **writeMSBFIRST()**. Note: this optimization is new and thus experimental.
+and **writeMSBFIRST()**. The unrolled loop blocks the interrupts per byte.
+
+Note: this optimization is new and thus experimental.
 Feedback, including improvements, is welcome.
 
 
@@ -71,8 +73,8 @@ Indicative time in microseconds, Arduino UNO, IDE 1.8.19, measured over 1000 cal
 
 - Note: 0.3.3 has improved the measurement, not the code sec.
 - Note: 0.3.3 numbers fixed when implementing 0.4.0. (error in test sketch).
-- Note: 0.4.0L measured with loop unrolled flag enabled.
 - Note: 0.4.0 measured with loop unroll flag disabled.
+- Note: 0.4.0L measured with loop unrolled flag enabled. (~25% faster)
 
 
 ### Related
@@ -92,6 +94,8 @@ Indicative time in microseconds, Arduino UNO, IDE 1.8.19, measured over 1000 cal
 
 ### Constructor
 
+bitOrder = { LSBFIRST, MSBFIRST };
+
 - **FastShiftOut(uint8_t dataOut, uint8_t clockPin, uint8_t bitOrder = LSBFIRST)** Constructor.
 
 
@@ -103,16 +107,16 @@ Indicative time in microseconds, Arduino UNO, IDE 1.8.19, measured over 1000 cal
 - **size_t write32(uint32_t data)** send 4 bytes. Wrapper around 8 bit calls.
 - **size_t write(uint8_t \*array, size_t size)** send array of size bytes.
 - **uint8_t lastWritten()** returns last byte written.
+- **size_t writeLSBFIRST(uint8_t data)** lowest level function, optimized for LSB.
+- **size_t writeMSBFIRST(uint8_t data)** lowest level function, optimized for MSB.
 
 
-### Meta
+### BitOrder
 
 - **bool setBitOrder(uint8_t bitOrder)** set LSBFIRST or MSBFIRST. 
 Returns false for other values ==> no change.
 - **uint8_t getBitOrder(void)** returns LSBFIRST or MSBFIRST as set in constructor 
 or latest set from **setBitOrder()**.
-- **size_t writeLSBFIRST(uint8_t data)** lowest level function, optimized for LSB.
-- **size_t writeMSBFIRST(uint8_t data)** lowest level function, optimized for MSB.
 
 
 ### Print interface
