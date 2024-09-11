@@ -160,12 +160,11 @@ size_t FastShiftOut::writeLSBFIRST(uint8_t data)
 #if defined(FASTSHIFTOUT_AVR_LOOP_UNROLLED)  //  AVR SPEED OPTIMIZED
 
   uint8_t cbmask1  = _clockBit;
-  //  uint8_t cbmask2  = ~_clockBit;
   uint8_t outmask1 = _dataOutBit;
   uint8_t outmask2 = ~_dataOutBit;
 
   volatile uint8_t* localDataOutRegister = _dataOutRegister;
-  volatile uint8_t* localClockRegister = _clockRegister;
+  volatile uint8_t* localClockRegister   = _clockRegister;
 
   //  disable interrupts (for all bits)
   uint8_t oldSREG = SREG;
@@ -179,7 +178,7 @@ size_t FastShiftOut::writeLSBFIRST(uint8_t data)
   //  so register can not change
   uint8_t r = *localClockRegister;
   *localClockRegister = r | cbmask1;  //  set one bit
-  *localClockRegister = r;            //  reset it
+  *localClockRegister = r;            //  reset bit
 
   if ((value & 0x02) == 0) *localDataOutRegister &= outmask2;
   else                     *localDataOutRegister |= outmask1;
@@ -249,8 +248,8 @@ size_t FastShiftOut::writeLSBFIRST(uint8_t data)
     *localClockRegister = r;            //  reset it
   }
 
-    //  restore interrupt state
-    SREG = oldSREG;
+  //  restore interrupt state
+  SREG = oldSREG;
 
 #endif  //  if (AVR)
 
