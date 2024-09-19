@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - added flag to select LOOP UNROLL (is optional as it gives larger code size)
 - optimized the not unrolled loop with ideas of the unrolling version.
 - corrected type lastValue to uint8_t
+- add FastShiftOut_scope_test.ino
 - update readme.md
 - minor edits
 
