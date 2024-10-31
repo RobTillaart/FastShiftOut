@@ -7,8 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [0.4.1] - 2024-09-03
-- fix #17, add more optimizations
-
+- fix #17, add more optimizations, kudos to nt314p
 
 ## [0.4.0] - 2024-09-03
 - fix #15, loop unroll option, improving performance, kudos to nt314p
