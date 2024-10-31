@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.4.1] - 2024-09-03
+- fix #17, add more optimizations
+
+
 ## [0.4.0] - 2024-09-03
 - fix #15, loop unroll option, improving performance, kudos to nt314p
 - fixed bug in test program (see #15)
