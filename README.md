@@ -86,6 +86,7 @@ Indicative time in microseconds, Arduino UNO, IDE 1.8.19, measured over 1000 cal
 - https://github.com/RobTillaart/FastShiftOut
 - https://github.com/RobTillaart/ShiftInSlow
 - https://github.com/RobTillaart/ShiftOutSlow
+- https://github.com/RobTillaart/SWSPI (experimental)
 
 
 ## Interface
